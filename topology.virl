@@ -27,6 +27,7 @@ feature telnet
 
 feature ospf
 feature bgp
+feature nxapi
 
 username adminbackup password 5 ! role network-operator
 username admin password 5 $1$KuOSBsvW$Cy0TSD..gEBGBPjzpDgf51 role network-admin
@@ -117,6 +118,7 @@ feature telnet
 
 feature ospf
 feature bgp
+feature nxapi
 
 username adminbackup password 5 ! role network-operator
 username admin password 5 $1$KuOSBsvW$Cy0TSD..gEBGBPjzpDgf51 role network-admin
@@ -207,6 +209,7 @@ feature telnet
 
 feature ospf
 feature bgp
+feature nxapi
 
 username adminbackup password 5 ! role network-operator
 username admin password 5 $1$KuOSBsvW$Cy0TSD..gEBGBPjzpDgf51 role network-admin
@@ -286,6 +289,7 @@ feature telnet
 
 feature ospf
 feature bgp
+feature nxapi
 
 username adminbackup password 5 ! role network-operator
 username admin password 5 $1$KuOSBsvW$Cy0TSD..gEBGBPjzpDgf51 role network-admin
@@ -365,6 +369,7 @@ feature telnet
 
 feature ospf
 feature bgp
+feature nxapi
 
 username adminbackup password 5 ! role network-operator
 username admin password 5 $1$KuOSBsvW$Cy0TSD..gEBGBPjzpDgf51 role network-admin
@@ -443,6 +448,7 @@ feature telnet
 
 feature ospf
 feature bgp
+feature nxapi
 
 username adminbackup password 5 ! role network-operator
 username admin password 5 $1$KuOSBsvW$Cy0TSD..gEBGBPjzpDgf51 role network-admin
