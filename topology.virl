@@ -4,7 +4,7 @@
         <entry key="management_network" type="String">flat</entry>
         <entry key="management_lxc" type="Boolean">false</entry>
     </extensions>
-    <node name="spine1" type="SIMPLE" subtype="NX-OSv 9000" location="400,200" ipv4="192.168.0.1">
+    <node name="spine1" type="SIMPLE" subtype="NX-OSv 9000" location="400,200">
         <extensions>
             <entry key="ansible_group" type="String">spine</entry>
             <entry key="config" type="string">! NX-OSv Config generated on 2018-05-17 14:27
@@ -89,6 +89,7 @@ interface mgmt0
 
         </entry>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
+            <entry key="Auto-generate config" type="Boolean">false</entry>
         </extensions>
         <interface id="0" name="Ethernet1/1" ipv4="10.0.0.6" netPrefixLenV4="30"/>
         <interface id="1" name="Ethernet1/2" ipv4="10.0.0.14" netPrefixLenV4="30"/>
@@ -180,13 +181,14 @@ interface mgmt0
 
         </entry>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
+            <entry key="Auto-generate config" type="Boolean">false</entry>
         </extensions>
         <interface id="0" name="Ethernet1/1" ipv4="10.0.0.10" netPrefixLenV4="30"/>
         <interface id="1" name="Ethernet1/2" ipv4="10.0.0.26" netPrefixLenV4="30"/>
         <interface id="2" name="Ethernet1/3" ipv4="10.0.0.30" netPrefixLenV4="30"/>
         <interface id="3" name="Ethernet1/4" ipv4="10.0.0.34" netPrefixLenV4="30"/>
     </node>
-    <node name="leaf1" type="SIMPLE" subtype="NX-OSv 9000" location="200,400" ipv4="192.168.1.1">
+    <node name="leaf1" type="SIMPLE" subtype="NX-OSv 9000" location="200,400">
         <extensions>
             <entry key="ansible_group" type="String">leaf</entry>
             <entry key="config" type="string">! NX-OSv Config generated on 2018-05-17 14:27
@@ -260,13 +262,15 @@ interface mgmt0
 
         </entry>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
+            <entry key="Auto-generate config" type="Boolean">false</entry>
         </extensions>
         <interface id="0" name="Ethernet1/1" ipv4="10.0.0.5" netPrefixLenV4="30"/>
         <interface id="1" name="Ethernet1/2" ipv4="10.0.0.9" netPrefixLenV4="30"/>
         <interface id="2" name="Ethernet1/3"/>
         <interface id="3" name="Ethernet1/4"/>
+        <interface id="4" name="Ethernet1/5"/>
     </node>
-    <node name="leaf2" type="SIMPLE" subtype="NX-OSv 9000" location="400,400" ipv4="192.168.1.2">
+    <node name="leaf2" type="SIMPLE" subtype="NX-OSv 9000" location="400,400">
         <extensions>
             <entry key="ansible_group" type="String">leaf</entry>
             <entry key="config" type="string">! NX-OSv Config generated on 2018-05-17 14:27
@@ -340,13 +344,15 @@ interface mgmt0
 
         </entry>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
+            <entry key="Auto-generate config" type="Boolean">false</entry>
         </extensions>
         <interface id="0" name="Ethernet1/1" ipv4="10.0.0.13" netPrefixLenV4="30"/>
         <interface id="1" name="Ethernet1/2" ipv4="10.0.0.25" netPrefixLenV4="30"/>
         <interface id="2" name="Ethernet1/3"/>
         <interface id="3" name="Ethernet1/4"/>
+        <interface id="4" name="Ethernet1/5"/>
     </node>
-    <node name="leaf3" type="SIMPLE" subtype="NX-OSv 9000" location="600,400" ipv4="192.168.1.3">
+    <node name="leaf3" type="SIMPLE" subtype="NX-OSv 9000" location="600,400">
         <extensions>
             <entry key="ansible_group" type="String">leaf</entry>
             <entry key="config" type="string">! NX-OSv Config generated on 2018-05-17 14:27
@@ -419,13 +425,15 @@ interface mgmt0
 
         </entry>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
+            <entry key="Auto-generate config" type="Boolean">false</entry>
         </extensions>
         <interface id="0" name="Ethernet1/1" ipv4="10.0.0.17" netPrefixLenV4="30"/>
         <interface id="1" name="Ethernet1/2" ipv4="10.0.0.29" netPrefixLenV4="30"/>
         <interface id="2" name="Ethernet1/3"/>
         <interface id="3" name="Ethernet1/4"/>
+        <interface id="4" name="Ethernet1/5"/>
     </node>
-    <node name="leaf4" type="SIMPLE" subtype="NX-OSv 9000" location="800,400" ipv4="192.168.1.4">
+    <node name="leaf4" type="SIMPLE" subtype="NX-OSv 9000" location="800,400">
         <extensions>
             <entry key="ansible_group" type="String">leaf</entry>
             <entry key="config" type="string">! NX-OSv Config generated on 2018-05-17 14:27
@@ -498,11 +506,254 @@ interface mgmt0
 
         </entry>
             <entry key="AutoNetkit.mgmt_ip" type="string"></entry>
+            <entry key="Auto-generate config" type="Boolean">false</entry>
         </extensions>
         <interface id="0" name="Ethernet1/1" ipv4="10.0.0.21" netPrefixLenV4="30"/>
         <interface id="1" name="Ethernet1/2" ipv4="10.0.0.33" netPrefixLenV4="30"/>
         <interface id="2" name="Ethernet1/3"/>
         <interface id="3" name="Ethernet1/4"/>
+        <interface id="4" name="Ethernet1/5"/>
+    </node>
+    <node name="server1" type="SIMPLE" subtype="server" location="200,500">
+        <extensions>
+            <entry key="config" type="string">#cloud-config
+bootcmd:
+- ln -s -t /etc/rc.d /etc/rc.local
+hostname: server1
+manage_etc_hosts: true
+runcmd:
+- start ttyS0
+- systemctl start getty@ttyS0.service
+- systemctl start rc-local
+- sed -i '/^\s*PasswordAuthentication\s\+no/d' /etc/ssh/sshd_config
+- echo "UseDNS no" &gt;&gt; /etc/ssh/sshd_config
+- service ssh restart
+- service sshd restart
+users:
+- default
+- gecos: User configured by VIRL Configuration Engine 0.23.10
+  lock-passwd: false
+  name: cisco
+  plain-text-passwd: cisco
+  shell: /bin/bash
+  ssh-authorized-keys:
+  - VIRL-USER-SSH-PUBLIC-KEY
+  sudo: ALL=(ALL) ALL
+write_files:
+- path: /etc/init/ttyS0.conf
+  owner: root:root
+  content: |
+    # ttyS0 - getty
+    # This service maintains a getty on ttyS0 from the point the system is
+    # started until it is shut down again.
+    start on stopped rc or RUNLEVEL=[12345]
+    stop on runlevel [!12345]
+    respawn
+    exec /sbin/getty -L 115200 ttyS0 vt102
+  permissions: '0644'
+- path: /etc/systemd/system/dhclient@.service
+  content: |
+    [Unit]
+    Description=Run dhclient on %i interface
+    After=network.target
+    [Service]
+    Type=oneshot
+    ExecStart=/sbin/dhclient %i -pf /var/run/dhclient.%i.pid -lf /var/lib/dhclient/dhclient.%i.lease
+    RemainAfterExit=yes
+  owner: root:root
+  permissions: '0644'
+- path: /etc/rc.local
+  owner: root:root
+  permissions: '0755'
+  content: |-
+    #!/bin/sh
+    ifconfig eth1 up 10.0.11.10 netmask 255.255.255.0
+    route add -net 10.0.0.0/16 gw 10.0.11.1
+    exit 0
+</entry>
+        </extensions>
+        <interface id="0" name="eth1" ipv4="10.0.0.6" netPrefixLenV4="30"/>
+    </node>
+    <node name="server2" type="SIMPLE" subtype="server" location="400,500">
+        <extensions>
+            <entry key="config" type="string">#cloud-config
+bootcmd:
+- ln -s -t /etc/rc.d /etc/rc.local
+hostname: server2
+manage_etc_hosts: true
+runcmd:
+- start ttyS0
+- systemctl start getty@ttyS0.service
+- systemctl start rc-local
+- sed -i '/^\s*PasswordAuthentication\s\+no/d' /etc/ssh/sshd_config
+- echo "UseDNS no" &gt;&gt; /etc/ssh/sshd_config
+- service ssh restart
+- service sshd restart
+users:
+- default
+- gecos: User configured by VIRL Configuration Engine 0.23.10
+  lock-passwd: false
+  name: cisco
+  plain-text-passwd: cisco
+  shell: /bin/bash
+  ssh-authorized-keys:
+  - VIRL-USER-SSH-PUBLIC-KEY
+  sudo: ALL=(ALL) ALL
+write_files:
+- path: /etc/init/ttyS0.conf
+  owner: root:root
+  content: |
+    # ttyS0 - getty
+    # This service maintains a getty on ttyS0 from the point the system is
+    # started until it is shut down again.
+    start on stopped rc or RUNLEVEL=[12345]
+    stop on runlevel [!12345]
+    respawn
+    exec /sbin/getty -L 115200 ttyS0 vt102
+  permissions: '0644'
+- path: /etc/systemd/system/dhclient@.service
+  content: |
+    [Unit]
+    Description=Run dhclient on %i interface
+    After=network.target
+    [Service]
+    Type=oneshot
+    ExecStart=/sbin/dhclient %i -pf /var/run/dhclient.%i.pid -lf /var/lib/dhclient/dhclient.%i.lease
+    RemainAfterExit=yes
+  owner: root:root
+  permissions: '0644'
+- path: /etc/rc.local
+  owner: root:root
+  permissions: '0755'
+  content: |-
+    #!/bin/sh
+    ifconfig eth1 up 10.0.12.20 netmask 255.255.255.0
+    route add -net 10.0.0.0/16 gw 10.0.12.1
+
+    exit 0
+</entry>
+        </extensions>
+        <interface id="0" name="eth1" ipv4="10.0.0.42" netPrefixLenV4="30"/>
+    </node>
+    <node name="server3" type="SIMPLE" subtype="server" location="600,500">
+        <extensions>
+            <entry key="config" type="string">#cloud-config
+bootcmd:
+- ln -s -t /etc/rc.d /etc/rc.local
+hostname: server3
+manage_etc_hosts: true
+runcmd:
+- start ttyS0
+- systemctl start getty@ttyS0.service
+- systemctl start rc-local
+- sed -i '/^\s*PasswordAuthentication\s\+no/d' /etc/ssh/sshd_config
+- echo "UseDNS no" &gt;&gt; /etc/ssh/sshd_config
+- service ssh restart
+- service sshd restart
+users:
+- default
+- gecos: User configured by VIRL Configuration Engine 0.23.10
+  lock-passwd: false
+  name: cisco
+  plain-text-passwd: cisco
+  shell: /bin/bash
+  ssh-authorized-keys:
+  - VIRL-USER-SSH-PUBLIC-KEY
+  sudo: ALL=(ALL) ALL
+write_files:
+- path: /etc/init/ttyS0.conf
+  owner: root:root
+  content: |
+    # ttyS0 - getty
+    # This service maintains a getty on ttyS0 from the point the system is
+    # started until it is shut down again.
+    start on stopped rc or RUNLEVEL=[12345]
+    stop on runlevel [!12345]
+    respawn
+    exec /sbin/getty -L 115200 ttyS0 vt102
+  permissions: '0644'
+- path: /etc/systemd/system/dhclient@.service
+  content: |
+    [Unit]
+    Description=Run dhclient on %i interface
+    After=network.target
+    [Service]
+    Type=oneshot
+    ExecStart=/sbin/dhclient %i -pf /var/run/dhclient.%i.pid -lf /var/lib/dhclient/dhclient.%i.lease
+    RemainAfterExit=yes
+  owner: root:root
+  permissions: '0644'
+- path: /etc/rc.local
+  owner: root:root
+  permissions: '0755'
+  content: |-
+    #!/bin/sh
+    ifconfig eth1 up 10.0.11.30 netmask 255.255.255.0
+    route add -net 10.0.0.0/16 gw 10.0.11.1
+    exit 0
+</entry>
+        </extensions>
+        <interface id="0" name="eth1" ipv4="10.0.0.54" netPrefixLenV4="30"/>
+    </node>
+    <node name="server4" type="SIMPLE" subtype="server" location="800,500">
+        <extensions>
+            <entry key="config" type="string">#cloud-config
+bootcmd:
+- ln -s -t /etc/rc.d /etc/rc.local
+hostname: server4
+manage_etc_hosts: true
+runcmd:
+- start ttyS0
+- systemctl start getty@ttyS0.service
+- systemctl start rc-local
+- sed -i '/^\s*PasswordAuthentication\s\+no/d' /etc/ssh/sshd_config
+- echo "UseDNS no" &gt;&gt; /etc/ssh/sshd_config
+- service ssh restart
+- service sshd restart
+users:
+- default
+- gecos: User configured by VIRL Configuration Engine 0.23.10
+  lock-passwd: false
+  name: cisco
+  plain-text-passwd: cisco
+  shell: /bin/bash
+  ssh-authorized-keys:
+  - VIRL-USER-SSH-PUBLIC-KEY
+  sudo: ALL=(ALL) ALL
+write_files:
+- path: /etc/init/ttyS0.conf
+  owner: root:root
+  content: |
+    # ttyS0 - getty
+    # This service maintains a getty on ttyS0 from the point the system is
+    # started until it is shut down again.
+    start on stopped rc or RUNLEVEL=[12345]
+    stop on runlevel [!12345]
+    respawn
+    exec /sbin/getty -L 115200 ttyS0 vt102
+  permissions: '0644'
+- path: /etc/systemd/system/dhclient@.service
+  content: |
+    [Unit]
+    Description=Run dhclient on %i interface
+    After=network.target
+    [Service]
+    Type=oneshot
+    ExecStart=/sbin/dhclient %i -pf /var/run/dhclient.%i.pid -lf /var/lib/dhclient/dhclient.%i.lease
+    RemainAfterExit=yes
+  owner: root:root
+  permissions: '0644'
+- path: /etc/rc.local
+  owner: root:root
+  permissions: '0755'
+  content: |-
+    #!/bin/sh
+    ifconfig eth1 up 10.0.12.40 netmask 255.255.255.0
+    route add -net 10.0.0.0/16 gw 10.0.12.1
+    exit 0
+</entry>
+        </extensions>
+        <interface id="0" name="eth1" ipv4="10.0.0.66" netPrefixLenV4="30"/>
     </node>
     <annotations>
         <rect x="161" y="360" radius="10" width="288" height="90" fill="CCCCCC" stroke-width="3"/>
@@ -524,4 +775,8 @@ interface mgmt0
     <connection dst="/virl:topology/virl:node[6]/virl:interface[3]" src="/virl:topology/virl:node[5]/virl:interface[3]"/>
     <connection dst="/virl:topology/virl:node[4]/virl:interface[4]" src="/virl:topology/virl:node[3]/virl:interface[4]"/>
     <connection dst="/virl:topology/virl:node[6]/virl:interface[4]" src="/virl:topology/virl:node[5]/virl:interface[4]"/>
+    <connection dst="/virl:topology/virl:node[3]/virl:interface[5]" src="/virl:topology/virl:node[7]/virl:interface[1]"/>
+    <connection dst="/virl:topology/virl:node[4]/virl:interface[5]" src="/virl:topology/virl:node[8]/virl:interface[1]"/>
+    <connection dst="/virl:topology/virl:node[5]/virl:interface[5]" src="/virl:topology/virl:node[9]/virl:interface[1]"/>
+    <connection dst="/virl:topology/virl:node[6]/virl:interface[5]" src="/virl:topology/virl:node[10]/virl:interface[1]"/>
 </topology>
