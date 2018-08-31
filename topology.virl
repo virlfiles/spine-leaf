@@ -567,7 +567,8 @@ write_files:
   permissions: '0755'
   content: |-
     #!/bin/sh
-    ifconfig eth1 up 10.0.11.10 netmask 255.255.255.0
+    ip link add link eth1 name eth1.11 type vlan id 11
+    ifconfig eth1.11 up 10.0.11.10 netmask 255.255.255.0
     route add -net 10.0.0.0/16 gw 10.0.11.1
     exit 0
 </entry>
@@ -627,7 +628,8 @@ write_files:
   permissions: '0755'
   content: |-
     #!/bin/sh
-    ifconfig eth1 up 10.0.12.20 netmask 255.255.255.0
+    ip link add link eth1 name eth1.12 type vlan id 12
+    ifconfig eth1.12 up 10.0.12.20 netmask 255.255.255.0
     route add -net 10.0.0.0/16 gw 10.0.12.1
 
     exit 0
@@ -688,7 +690,8 @@ write_files:
   permissions: '0755'
   content: |-
     #!/bin/sh
-    ifconfig eth1 up 10.0.11.30 netmask 255.255.255.0
+    ip link add link eth1 name eth1.11 type vlan id 11
+    ifconfig eth1.11 up 10.0.11.30 netmask 255.255.255.0
     route add -net 10.0.0.0/16 gw 10.0.11.1
     exit 0
 </entry>
@@ -748,7 +751,8 @@ write_files:
   permissions: '0755'
   content: |-
     #!/bin/sh
-    ifconfig eth1 up 10.0.12.40 netmask 255.255.255.0
+    ip link add link eth1 name eth1.12 type vlan id 12
+    ifconfig eth1.12 up 10.0.12.40 netmask 255.255.255.0
     route add -net 10.0.0.0/16 gw 10.0.12.1
     exit 0
 </entry>
